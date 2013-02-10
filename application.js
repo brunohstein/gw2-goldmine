@@ -25,7 +25,7 @@ Item.prototype.getMaxOfferPrice = function() { return this.max_offer_price; };
 Item.prototype.getOfferQuantity = function() { return this.offer_quantity; };
 Item.prototype.getMinSalePrice  = function() { return this.min_sale_price; };
 Item.prototype.getSaleQuantity  = function() { return this.sale_quantity; };
-Item.prototype.printItem        = function() { $('ul', '#results').html('<li>'+ this.getName() +'</li>'); };
+Item.prototype.printItem        = function() { $('ul', '#results').append('<li>' + this.getName() + '</li>'); };
 
 $(document).ready(function() {
 
@@ -65,21 +65,23 @@ $(document).ready(function() {
         $('#loader').fadeOut();
         $('#results').fadeIn();
         
-        var items = new Array();
+        var items = new Array(),
+            results = 0;
 
-        $.each(data.results, function(i, result) {
-          items.push(result);
-        });
+        $.each(data.results, function(i, result) { items.push(result); });
 
         for (i = 0; i < items.length; i++) {
           var me = items[i];
-          if (me.min_sale_unit_price > me.max_offer_unit_price) {
+          if (me.min_sale_unit_price > 10 && me.max_offer_unit_price > 10 && me.min_sale_unit_price > me.max_offer_unit_price * 10 && me.sale_availability > 50 && me.offer_availability > 50) {
             var profitable = new Item(me.name, me.restriction_level, me.rarity, me.img, me.max_offer_unit_price, me.offer_availability, me.min_sale_unit_price, me.sale_availability);
             profitable.printItem();
-          } else {
-            $('ul', '#results').html('<li>Nenhum produto vai te deixar rico hoje. :(</li>');
+            results++;
           }
         };
+
+        if (results == 0) {
+          $('ul', '#results').html('<li>No donuts for you today.</li>');
+        }
       }
     );
 
