@@ -48,8 +48,8 @@ $(document).ready(function() {
   //////////////////////////
 
   var itemsDisplayed = 20,
-      saleQuantity   = 500,
-      offerQuantity  = 500,
+      saleQuantity   = 250,
+      offerQuantity  = 250,
       minimumOffer   = 30,
       minimumProfit  = 0.5;
 
