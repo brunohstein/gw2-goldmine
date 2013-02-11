@@ -6,7 +6,7 @@
 </head>
 <body>
   <section id="action">
-    <select name="type">
+    <select id="type">
       <option value="0">Armor</option>
       <option value="2">Bag</option>
       <option value="3">Consumable</option>
@@ -22,6 +22,12 @@
       <option value="18">Weapon</option>
       <option value="all">All (turtle mode)</option>
     </select>
+
+    Items displayed: <input id="itemsDisplayed" type="text" value="20">
+    Number of sales: <input id="saleQuantity" type="text" value="500">
+    Number of offers: <input id="offerQuantity" type="text" value="500">
+    Minimum offer: <input id="minimumOffer" type="text" value="30">
+    Minimum profit percentage: <input id="minimumProfit" type="text" value="0.5">
 
     <a href="#" id="submit">Profit!</a>
   </section>

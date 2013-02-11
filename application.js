@@ -61,7 +61,13 @@ $(document).ready(function() {
   //////////////////////////////////////////////
 
   $('#submit').click(function() {
-    var type = $('select', '#action').val();
+    var type = $('#type', '#action').val();
+    
+    itemsDisplayed = $('#itemsDisplayed').val();
+    saleQuantity   = $('#saleQuantity').val();
+    offerQuantity  = $('#offerQuantity').val();
+    minimumOffer   = $('#minimumOffer').val();
+    minimumProfit  = $('#minimumProfit').val();
 
     ////////////////
     // UI changes //
