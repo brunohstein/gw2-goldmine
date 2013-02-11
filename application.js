@@ -2,7 +2,7 @@
 // Create Item class //
 ///////////////////////
 
-var Item = function(name, restriction_level, rarity, img, max_offer_unit_price, offer_availability, min_sale_unit_price, sale_availability) {
+var Item = function(name, restriction_level, rarity, img, max_offer_unit_price, offer_availability, min_sale_unit_price, sale_availability, sale_price_change_last_hour, offer_price_change_last_hour) {
   this.name            = name;
   this.level           = restriction_level;
   this.rarity          = rarity;
@@ -11,21 +11,25 @@ var Item = function(name, restriction_level, rarity, img, max_offer_unit_price, 
   this.offer_quantity  = offer_availability;
   this.min_sale_price  = min_sale_unit_price;
   this.sale_quantity   = sale_availability;
+  this.sale_variation  = sale_price_change_last_hour;
+  this.offer_variation = offer_price_change_last_hour;
 };
 
 ///////////////////////////
 // Create Item functions //
 ///////////////////////////
 
-Item.prototype.getName          = function() { return this.name; };
-Item.prototype.getLevel         = function() { return this.level; };
-Item.prototype.getRarity        = function() { if (this.rarity == 0) { return 'junk' } else if (this.rarity == 1) { return 'common' } else if (this.rarity == 2) { return 'fine' } else if (this.rarity == 3) { return 'masterwork' } else if (this.rarity == 4) { return 'rare' } else if (this.rarity == 5) { return 'exotic' } else if (this.rarity == 6) { return 'legendary' }; };
-Item.prototype.getImage         = function() { return this.image; };
-Item.prototype.getMaxOfferPrice = function() { return toGSC(this.max_offer_price); };
-Item.prototype.getOfferQuantity = function() { return this.offer_quantity; };
-Item.prototype.getMinSalePrice  = function() { return toGSC(this.min_sale_price); };
-Item.prototype.getSaleQuantity  = function() { return this.sale_quantity; };
-Item.prototype.printItem        = function() { $('ul', '#results').append( ['<li>', '<img src="' + this.getImage() + '" />', '<span class="name ' + this.getRarity() + '">'+ this.getName() + '</span>', '<span class="level">'+ this.getLevel() + '</span>', '<span class="offer">'+ this.getMaxOfferPrice() + '</span>', '<span class="sale">'+ this.getMinSalePrice() + '</span>', '</li>'].join('') ); };
+Item.prototype.getName           = function() { return this.name; };
+Item.prototype.getLevel          = function() { return this.level; };
+Item.prototype.getRarity         = function() { if (this.rarity == 0) { return 'junk' } else if (this.rarity == 1) { return 'common' } else if (this.rarity == 2) { return 'fine' } else if (this.rarity == 3) { return 'masterwork' } else if (this.rarity == 4) { return 'rare' } else if (this.rarity == 5) { return 'exotic' } else if (this.rarity == 6) { return 'legendary' }; };
+Item.prototype.getImage          = function() { return this.image; };
+Item.prototype.getMaxOfferPrice  = function() { return toGSC(this.max_offer_price); };
+Item.prototype.getOfferQuantity  = function() { return this.offer_quantity; };
+Item.prototype.getMinSalePrice   = function() { return toGSC(this.min_sale_price); };
+Item.prototype.getSaleQuantity   = function() { return this.sale_quantity; };
+Item.prototype.getSaleVariation  = function() { if (this.sale_variation > 0) { return 'increase' } else if (this.sale_variation < 0) { return 'decrease' } else { return 'same'} }
+Item.prototype.getOfferVariation = function() { if (this.offer_variation > 0) { return 'increase' } else if (this.offer_variation < 0) { return 'decrease' } else { return 'same'} }
+Item.prototype.printItem         = function() { $('ul', '#results').append( ['<li>', '<img src="' + this.getImage() + '" />', '<span class="name ' + this.getRarity() + '">'+ this.getName() + '</span>', '<span class="level">'+ this.getLevel() + '</span>', '<span class="offer ' + this.getOfferVariation() + '">'+ this.getMaxOfferPrice() + '</span>', '<span class="sale ' + this.getSaleVariation() + '">'+ this.getMinSalePrice() + '</span>', '</li>'].join('') ); };
 
 ///////////////////////////////////////////////////////////////////////////
 // Function to convert int to gold/silver/copper (credits to tpcalc.com) //
@@ -136,7 +140,7 @@ $(document).ready(function() {
 
           for (i = 0; i < itemsDisplayed; i++) {
             var me = items[i];
-            var profitable = new Item(me.name, me.restriction_level, me.rarity, me.img, me.max_offer_unit_price, me.offer_availability, me.min_sale_unit_price, me.sale_availability);
+            var profitable = new Item(me.name, me.restriction_level, me.rarity, me.img, me.max_offer_unit_price, me.offer_availability, me.min_sale_unit_price, me.sale_availability, me.sale_price_change_last_hour, me.offer_price_change_last_hour);
             profitable.printItem();
           };
         }
