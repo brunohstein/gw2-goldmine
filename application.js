@@ -43,16 +43,6 @@ toGSC = function(val) { var openG = '<span class="gold">'; var closeG = '</span>
 
 $(document).ready(function() {
 
-  //////////////////////////
-  // Application settings //
-  //////////////////////////
-
-  var itemsDisplayed = 20,
-      saleQuantity   = 250,
-      offerQuantity  = 250,
-      minimumOffer   = 30,
-      minimumProfit  = 0.5;
-
   ////////////////
   // UI changes //
   ////////////////
@@ -64,14 +54,27 @@ $(document).ready(function() {
   // Initialize script when submit is clicked //
   //////////////////////////////////////////////
 
-  $('#submit').click(function() {
+  $('#single, #multiple').click(function() {
+
+    //////////////////////////
+    // Application settings //
+    //////////////////////////
+
     var type = $('#type', '#action').val();
-    
-    itemsDisplayed = $('#itemsDisplayed').val();
-    saleQuantity   = $('#saleQuantity').val();
-    offerQuantity  = $('#offerQuantity').val();
-    minimumOffer   = $('#minimumOffer').val();
-    minimumProfit  = $('#minimumProfit').val();
+
+    if ($(this).is('#single')) {
+      var itemsDisplayed = 20,
+          saleQuantity   = 5,
+          offerQuantity  = 5,
+          minimumOffer   = 150000,
+          minimumProfit  = 0.3;
+    } else if ($(this).is('#multiple')) {
+      var itemsDisplayed = 20,
+          saleQuantity   = 250,
+          offerQuantity  = 250,
+          minimumOffer   = 30,
+          minimumProfit  = 0.6;
+    };
 
     ////////////////
     // UI changes //
