@@ -43,9 +43,10 @@ $(document).ready(function() {
   // Application settings //
   //////////////////////////
 
-  var itemsDisplayed = 5,
+  var itemsDisplayed = 20,
       saleQuantity   = 500,
       offerQuantity  = 500,
+      minimumOffer   = 30,
       minimumProfit  = 0.5;
 
   ////////////////
@@ -91,7 +92,7 @@ $(document).ready(function() {
         ////////////////////////
 
         $.each(data.results, function(i, result) {
-          if (result.sale_availability >= saleQuantity && result.offer_availability >= offerQuantity && result.min_sale_unit_price >= result.max_offer_unit_price + (result.max_offer_unit_price * minimumProfit)) {
+          if (result.max_offer_unit_price >= minimumOffer && result.sale_availability >= saleQuantity && result.offer_availability >= offerQuantity && result.min_sale_unit_price >= result.max_offer_unit_price + (result.max_offer_unit_price * minimumProfit)) {
             items.push(result);
           }
         });
@@ -103,7 +104,19 @@ $(document).ready(function() {
           //////////////////////////////////////
 
           $('#results').html('No donuts for you today.');
+
         } else {
+
+          if (items.length < itemsDisplayed) {
+
+            ////////////////////////////////////////////////
+            // Show message if there is not so many items //
+            ////////////////////////////////////////////////
+
+            itemsDisplayed = items.length;
+            $('ul', '#results').after("That's all for now folks.");
+
+          };
 
           ////////////////////////////////////////////
           // Sort array of items by relative profit //
