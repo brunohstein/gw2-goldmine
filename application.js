@@ -40,8 +40,17 @@ toGSC = function(val) { var openG = '<span class="gold">'; var closeG = '</span>
 $(document).ready(function() {
 
   //////////////////////////
-  // Hide future elements //
+  // Application settings //
   //////////////////////////
+
+  var itemsDisplayed = 5,
+      saleQuantity   = 500,
+      offerQuantity  = 500,
+      minimumProfit  = 0.5;
+
+  ////////////////
+  // UI changes //
+  ////////////////
 
   $('#loader').hide();
   $('#results').hide();
@@ -53,31 +62,64 @@ $(document).ready(function() {
   $('#submit').click(function() {
     var type = $('select', '#action').val();
 
+    ////////////////
+    // UI changes //
+    ////////////////
+
     $('#action').fadeOut();
     $('#loader').fadeIn();
+
+    ////////////////
+    // Parse JSON //
+    ////////////////
 
     $.getJSON('http://gw2spidy.com/api/v0.9/json/all-items/' + type + '?callback=?',
       {},
       function(data) {
+
+        ////////////////
+        // UI changes //
+        ////////////////
+
         $('#loader').fadeOut();
         $('#results').fadeIn();
         
-        var items = new Array(),
-            results = 0;
+        var items = new Array();
 
-        $.each(data.results, function(i, result) { items.push(result); });
+        ////////////////////////
+        // Filter the results //
+        ////////////////////////
 
-        for (i = 0; i < items.length; i++) {
-          var me = items[i];
-          if (me.min_sale_unit_price > 10 && me.max_offer_unit_price > 10 && me.min_sale_unit_price > me.max_offer_unit_price * 10 && me.sale_availability > 50 && me.offer_availability > 50) {
+        $.each(data.results, function(i, result) {
+          if (result.sale_availability >= saleQuantity && result.offer_availability >= offerQuantity && result.min_sale_unit_price >= result.max_offer_unit_price + (result.max_offer_unit_price * minimumProfit)) {
+            items.push(result);
+          }
+        });
+
+        if (items.length == 0) {
+
+          //////////////////////////////////////
+          // Show message if nothing is found //
+          //////////////////////////////////////
+
+          $('#results').html('No donuts for you today.');
+        } else {
+
+          ////////////////////////////////////////////
+          // Sort array of items by relative profit //
+          ////////////////////////////////////////////
+
+          items.sort(function(a, b) { return parseFloat(a.max_offer_unit_price / a.min_sale_unit_price) - parseFloat(b.max_offer_unit_price / b.min_sale_unit_price) } );
+
+          ///////////////////
+          // Print results //
+          ///////////////////
+
+          for (i = 0; i < itemsDisplayed; i++) {
+            var me = items[i];
             var profitable = new Item(me.name, me.restriction_level, me.rarity, me.img, me.max_offer_unit_price, me.offer_availability, me.min_sale_unit_price, me.sale_availability);
             profitable.printItem();
-            results++;
-          }
-        };
-
-        if (results == 0) {
-          $('ul', '#results').html('<li>No donuts for you today.</li>');
+          };
         }
       }
     );
