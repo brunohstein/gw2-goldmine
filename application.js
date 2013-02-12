@@ -29,7 +29,7 @@ Item.prototype.getMinSalePrice   = function() { return toGSC(this.min_sale_price
 Item.prototype.getSaleQuantity   = function() { return this.sale_quantity; };
 Item.prototype.getSaleVariation  = function() { if (this.sale_variation > 0) { return 'increase' } else if (this.sale_variation < 0) { return 'decrease' } else { return 'same'} }
 Item.prototype.getOfferVariation = function() { if (this.offer_variation > 0) { return 'increase' } else if (this.offer_variation < 0) { return 'decrease' } else { return 'same'} }
-Item.prototype.printItem         = function() { $('ul', '#results').append( ['<li>', '<img src="' + this.getImage() + '" />', '<span class="name ' + this.getRarity() + '">'+ this.getName() + '</span>', '<span class="level">'+ this.getLevel() + '</span>', '<span class="offer ' + this.getOfferVariation() + '">'+ this.getMaxOfferPrice() + '</span>', '<span class="sale ' + this.getSaleVariation() + '">'+ this.getMinSalePrice() + '</span>', '</li>'].join('') ); };
+Item.prototype.printItem         = function() { $('ul', '#results').append( ['<li>', '<img src="' + this.getImage() + '" />', '<span class="name ' + this.getRarity() + '">' + this.getName() + ' (' + this.getLevel() + ')</span>', '<span class="offer ' + this.getOfferVariation() + '">Buy price: '+ this.getMaxOfferPrice() + '</span>', '<span class="sale ' + this.getSaleVariation() + '">Sale price: '+ this.getMinSalePrice() + '</span>', '</li>'].join('') ); };
 
 ///////////////////////////////////////////////////////////////////////////
 // Function to convert int to gold/silver/copper (credits to tpcalc.com) //
@@ -47,8 +47,12 @@ $(document).ready(function() {
   // UI changes //
   ////////////////
 
-  $('#loader').hide();
-  $('#results').hide();
+  var right = $(window).width(),
+      left  = -$(window).width(),
+      show  = 0;
+
+  $('#loader').css({left: right});
+  $('#results').css({left: right});
 
   //////////////////////////////////////////////
   // Initialize script when submit is clicked //
@@ -80,8 +84,8 @@ $(document).ready(function() {
     // UI changes //
     ////////////////
 
-    $('#action').fadeOut();
-    $('#loader').fadeIn();
+    $('#action').animate({left: left});
+    $('#loader').animate({left: show});
 
     ////////////////
     // Parse JSON //
@@ -95,8 +99,8 @@ $(document).ready(function() {
         // UI changes //
         ////////////////
 
-        $('#loader').fadeOut();
-        $('#results').fadeIn();
+        $('#loader').animate({left: left});
+        $('#results').animate({left: show});
         
         var items = new Array();
 
@@ -116,7 +120,7 @@ $(document).ready(function() {
           // Show message if nothing is found //
           //////////////////////////////////////
 
-          $('#results').html('No donuts for you today.');
+          $('h2', '#results').html('No donuts for you today.');
 
         } else {
 
@@ -127,7 +131,7 @@ $(document).ready(function() {
             ////////////////////////////////////////////////
 
             itemsDisplayed = items.length;
-            $('ul', '#results').after("That's all for now folks.");
+            $('ul', '#results').append("<li>That's all for now folks.</li>");
 
           };
 
