@@ -13,7 +13,7 @@ ul li .name { font-weight: bold; display: block; }
 ul li .name.junk { color: silver; }
 ul li .name.common { color: gray; }
 ul li .name.fine { color: blue; }
-ul li .name.mastercraft { color: green; }
+ul li .name.masterwork { color: green; }
 ul li .name.rare { color: yellow; }
 ul li .name.exotic { color: orange; }
 ul li .name.legendary { color: purple; }
