@@ -80,7 +80,7 @@ $(document).ready(function() {
           minimumOffer   = 35000,
           minimumProfit  = 0.4,
           exclusivity    = false;
-    } else if ($(this).is('#low')) {
+    } else if ($(this).is('#high')) {
       var itemsDisplayed = 20,
           saleQuantity   = 3,
           offerQuantity  = 3,
@@ -120,11 +120,14 @@ $(document).ready(function() {
         $.each(data.results, function(i, result) {
 
           if (result.max_offer_unit_price >= minimumOffer && result.sale_availability >= saleQuantity && result.offer_availability >= offerQuantity && result.min_sale_unit_price >= result.max_offer_unit_price + (result.max_offer_unit_price * minimumProfit)) {
+            console.log('cumpriu requisitos mínimos');
             if (exclusivity == true) {
+              console.log('exclusivo');
               if (result.sale_price_change_last_hour > 0 || result.offer_price_change_last_hour < 0) {
                 items.push(result);
               }
             } else {
+              console.log('não exclusivo');
               items.push(result);
             }
           };
