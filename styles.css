@@ -16,7 +16,7 @@ ul li .name.fine { color: blue; }
 ul li .name.masterwork { color: green; }
 ul li .name.rare { color: yellow; }
 ul li .name.exotic { color: orange; }
-ul li .name.legendary { color: purple; }
+ul li .name.undefined { color: purple; }
 ul li .level { font-weight: bold; float: left; }
 ul li .offer { display: block; clear: both; }
 ul li .gold { color: orange; margin: 0 5px 0 0; font-weight: bold; }
