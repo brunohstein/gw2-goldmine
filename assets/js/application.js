@@ -68,6 +68,13 @@ $(document).ready(function() {
   $('#loader').css({left: right});
   $('#results').css({left: right});
 
+  $('#clear').click(function() {
+    $('#loader').animate({left: right});
+    $('#results').animate({left: right});
+    $('#action').animate({left: show});
+    $('.results-list', '#results').html('');
+  });
+
   //////////////////////////////////////////////
   // Initialize script when submit is clicked //
   //////////////////////////////////////////////
