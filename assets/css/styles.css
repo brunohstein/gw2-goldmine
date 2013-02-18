@@ -1,0 +1,21 @@
+body { height: 100%; overflow-x: hidden; background: #eee; }
+section { width: 100%; height: 100%; position: absolute; box-sizing: border-box; }
+
+#action .btn-large { margin-bottom: 5px; }
+
+.results-list { margin: -30px 0 0 30px; padding-bottom: 40px; }
+.media { margin-bottom: 30px !important; margin-top: 0 !important; background: #f5f5f5; padding: 10px; box-sizing: border-box; border: 1px solid #ddd; border-radius: 3px; box-shadow: 0 1px 2px 0 #e5e5e5; }
+.media img { border-radius: 3px; }
+.media h5 { margin: 0 0 2px; }
+.media p { font-size: 13px; margin: 0; }
+.media .name { font-weight: bold; }
+.media .name.junk { color: silver; }
+.media .name.common { color: gray; }
+.media .name.fine { color: blue; }
+.media .name.masterwork { color: green; }
+.media .name.rare { color: yellow; }
+.media .name.exotic { color: orange; }
+.media .name.undefined { color: purple; }
+.media .gold { color: orange; margin: 0 5px 0 0; font-weight: bold; }
+.media .silver { color: silver; margin: 0 5px 0 0; font-weight: bold; }
+.media .copper { color: olive; font-weight: bold; }

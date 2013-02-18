@@ -3,53 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <title>BRR ~ Guild Wars 2 Gold Mine</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
   <section id="action">
-    <header>
-      <h1>Guild Wars 2 Gold Mine</h1>
-      <h2>Choose a recipe and listen to our counselor</h2>
-    </header>
-    <form>
-      <select id="type">
-        <option value="0">Armor</option>
-        <option value="2">Bag</option>
-        <option value="3">Consumable</option>
-        <option value="4">Container</option>
-        <option value="5">Crafting Material</option>
-        <option value="6">Gathering</option>
-        <option value="7">Gizmo</option>
-        <option value="11">Mini</option>
-        <option value="13">Tool</option>
-        <option value="15">Trinket</option>
-        <option value="16">Trophy</option>
-        <option value="17">Upgrade Component</option>
-        <option value="18">Weapon</option>
-        <option value="all">All (turtle mode)</option>
-      </select>
-      <a href="#" id="low">hawk <i>(from 1s)</i></a>
-      <a href="#" id="medium">store <i>(from 3.5g)</i></a>
-      <a href="#" id="high">mart <i>(from 15g)</i></a>
-    </form>
+    <div class="hero-unit">
+      <h1>GW2 Gold Mine</h1>
+      <p>
+        Select the item type you are looking for and the price range you are capable to invest and let us do the rest.
+      </p>
+      <p>
+        <select id="type">
+          <option value="0">Armor</option>
+          <option value="2">Bag</option>
+          <option value="3">Consumable</option>
+          <option value="4">Container</option>
+          <option value="5">Crafting Material</option>
+          <option value="6">Gathering</option>
+          <option value="7">Gizmo</option>
+          <option value="11">Mini</option>
+          <option value="13">Tool</option>
+          <option value="15">Trinket</option>
+          <option value="16">Trophy</option>
+          <option value="17">Upgrade Component</option>
+          <option value="18">Weapon</option>
+          <option value="all">All (turtle mode)</option>
+        </select>
+      </p>
+      <p>
+        <a class="btn btn-primary btn-large" id="low">
+          From 1 silver
+        </a>
+        <a class="btn btn-primary btn-large" id="medium">
+          From 3.5 gold
+        </a>
+        <a class="btn btn-primary btn-large" id="high">
+          From 15 gold
+        </a>
+      </p>
+    </div>
   </section>
 
   <section id="loader">
-    <header>
+    <div class="hero-unit">
       <h1>Just wait</h1>
-      <h2>Our economy experts are doing the magic for you</h2>
-    </header>
+      <p>
+        Our economy experts are meeting and doing all the maths.
+      </p>
+    </div>
   </section>
 
   <section id="results">
-    <header>
+    <div class="hero-unit">
       <h1>And here it is</h1>
-      <h2>The most profitable items your money can buy</h2>
-    </header>
-    <ul></ul>
+      <p>
+        The most profitable items your money can buy.
+      </p>
+      <p>
+        <a class="btn btn-primary btn-large" href="/">
+          Search again
+        </a>
+      </p>
+    </div>
+    <div class="results-list clearfix"></div>
   </section>
 
-  <script src="jquery-1.7.2.min.js" type="text/javascript"></script>
-  <script src="application.js" type="text/javascript"></script>
+  <script src="assets/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+  <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="assets/js/application.js" type="text/javascript"></script>
 </body>
 </html>

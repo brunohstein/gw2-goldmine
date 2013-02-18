@@ -29,7 +29,21 @@ Item.prototype.getMinSalePrice   = function() { return toGSC(this.min_sale_price
 Item.prototype.getSaleQuantity   = function() { return this.sale_quantity; };
 Item.prototype.getSaleVariation  = function() { if (this.sale_variation > 0) { return 'increase' } else if (this.sale_variation < 0) { return 'decrease' } else { return 'same'} }
 Item.prototype.getOfferVariation = function() { if (this.offer_variation > 0) { return 'increase' } else if (this.offer_variation < 0) { return 'decrease' } else { return 'same'} }
-Item.prototype.printItem         = function() { $('ul', '#results').append( ['<li>', '<img src="' + this.getImage() + '" />', '<span class="name ' + this.getRarity() + '">' + this.getName() + ' (' + this.getLevel() + ')</span>', '<span class="offer ' + this.getOfferVariation() + '">Buy price: '+ this.getMaxOfferPrice() + '</span>', '<span class="sale ' + this.getSaleVariation() + '">Sale price: '+ this.getMinSalePrice() + '</span>', '</li>'].join('') ); };
+Item.prototype.printItem         = function() {
+  $('.results-list', '#results').append([
+    '<div class="media span4">',
+      '<div class="pull-left">',
+        '<img src="' + this.getImage() + '" class="media-object" />',
+      '</div>',
+      '<div class="media-body">',
+        '<h5 class="name ' + this.getRarity() + '">' + this.getName() + '</h5>',
+        '<p class="level">Level: '+ this.getLevel() + '</p>',
+        '<p class="offer ' + this.getOfferVariation() + '">Buy price: '+ this.getMaxOfferPrice() + '</p>',
+        '<p class="sale ' + this.getSaleVariation() + '">Sale price: ' + this.getMinSalePrice() + '</p>',
+      '</div>',
+    '</div>'
+  ].join(''));
+};
 
 ///////////////////////////////////////////////////////////////////////////
 // Function to convert int to gold/silver/copper (credits to tpcalc.com) //
