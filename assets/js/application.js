@@ -176,20 +176,9 @@ $(document).ready(function() {
           // Show message if nothing is found //
           //////////////////////////////////////
 
-          $('h2', '#results').html('No donuts for you today.');
+          $('h1', '#results').html('Oh no').next().html('These are not the items you are looking for.');
 
         } else {
-
-          if (items.length < itemsDisplayed) {
-
-            ////////////////////////////////////////////////
-            // Show message if there is not so many items //
-            ////////////////////////////////////////////////
-
-            itemsDisplayed = items.length;
-            $('ul', '#results').append("<li>That's all for now folks.</li>");
-
-          };
 
           ////////////////////////////////////////////
           // Sort array of items by relative profit //
