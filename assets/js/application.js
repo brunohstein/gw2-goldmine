@@ -40,9 +40,13 @@ Item.prototype.printItem         = function() {
         '<p class="level">Level: '+ this.getLevel() + '</p>',
         '<p class="offer ' + this.getOfferVariation() + '">Buy price: '+ this.getMaxOfferPrice() + '</p>',
         '<p class="sale ' + this.getSaleVariation() + '">Sale price: ' + this.getMinSalePrice() + '</p>',
+        '<a href="#" class="btn btn-copy btn-small pull-right" data-clipboard-text="' + this.getName() + '" title="Copy to Clipboard">',
+          '<i class="icon-pencil"></i>',
+        '</a>',
       '</div>',
     '</div>'
   ].join(''));
+  copyToClipboard();
 };
 
 ///////////////////////////////////////////////////////////////////////////
@@ -74,6 +78,21 @@ $(document).ready(function() {
     $('#action').animate({left: show});
     $('.results-list', '#results').html('');
   });
+
+  ///////////////////////
+  // Copy to Clipboard //
+  ///////////////////////
+
+  copyToClipboard = function() {
+    var clip = new ZeroClipboard($('.btn-copy'), {
+      moviePath: "assets/swf/ZeroClipboard.swf"
+    });
+
+    clip.on('complete', function(client, args) {
+      $('i', '.btn-copy').removeClass().addClass('icon-pencil');
+      $('.btn-copy[data-clipboard-text="' + args.text + '"]').find('i').removeClass().addClass('icon-ok');
+    });
+  };
 
   //////////////////////////////////////////////
   // Initialize script when submit is clicked //
