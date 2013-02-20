@@ -2,8 +2,9 @@
 // Create Item class //
 ///////////////////////
 
-var Item = function(name, restriction_level, rarity, img, max_offer_unit_price, offer_availability, min_sale_unit_price, sale_availability, sale_price_change_last_hour, offer_price_change_last_hour) {
+var Item = function(name, data_id, restriction_level, rarity, img, max_offer_unit_price, offer_availability, min_sale_unit_price, sale_availability, sale_price_change_last_hour, offer_price_change_last_hour) {
   this.name            = name;
+  this.id              = data_id;
   this.level           = restriction_level;
   this.rarity          = rarity;
   this.image           = img;
@@ -20,6 +21,7 @@ var Item = function(name, restriction_level, rarity, img, max_offer_unit_price, 
 ///////////////////////////
 
 Item.prototype.getName           = function() { return this.name; };
+Item.prototype.getId             = function() { return this.id; };
 Item.prototype.getLevel          = function() { return this.level; };
 Item.prototype.getRarity         = function() { if (this.rarity == 0) { return 'junk' } else if (this.rarity == 1) { return 'common' } else if (this.rarity == 2) { return 'fine' } else if (this.rarity == 3) { return 'masterwork' } else if (this.rarity == 4) { return 'rare' } else if (this.rarity == 5) { return 'exotic' } else if (this.rarity == 6) { return 'legendary' }; };
 Item.prototype.getImage          = function() { return this.image; };
@@ -42,6 +44,9 @@ Item.prototype.printItem         = function() {
         '<p class="sale ' + this.getSaleVariation() + '">Sale price: ' + this.getMinSalePrice() + '</p>',
         '<a href="#" class="btn btn-copy btn-small pull-right" data-clipboard-text="' + this.getName() + '" title="Copy to Clipboard">',
           '<i class="icon-pencil"></i>',
+        '</a>',
+        '<a href="http://www.guildwarstrade.com/item/' + this.getId() + '" target="_blank" class="btn btn-data btn-small pull-right" title="View in Guild Wars Trade">',
+          '<i class="icon-list-alt"></i>',
         '</a>',
       '</div>',
     '</div>'
@@ -192,7 +197,7 @@ $(document).ready(function() {
 
           for (i = 0; i < itemsDisplayed; i++) {
             var me = items[i];
-            var profitable = new Item(me.name, me.restriction_level, me.rarity, me.img, me.max_offer_unit_price, me.offer_availability, me.min_sale_unit_price, me.sale_availability, me.sale_price_change_last_hour, me.offer_price_change_last_hour);
+            var profitable = new Item(me.name, me.data_id, me.restriction_level, me.rarity, me.img, me.max_offer_unit_price, me.offer_availability, me.min_sale_unit_price, me.sale_availability, me.sale_price_change_last_hour, me.offer_price_change_last_hour);
             profitable.printItem();
           };
         }
