@@ -31,6 +31,7 @@ Item.prototype.getMinSalePrice   = function() { return toGSC(this.min_sale_price
 Item.prototype.getSaleQuantity   = function() { return this.sale_quantity; };
 Item.prototype.getSaleVariation  = function() { if (this.sale_variation > 0) { return 'increase' } else if (this.sale_variation < 0) { return 'decrease' } else { return 'same'} }
 Item.prototype.getOfferVariation = function() { if (this.offer_variation > 0) { return 'increase' } else if (this.offer_variation < 0) { return 'decrease' } else { return 'same'} }
+Item.prototype.getProfit         = function() { return toGSC(this.min_sale_price - this.max_offer_price - Math.floor(this.min_sale_price * 0.15)); }
 Item.prototype.printItem         = function() {
   $('.results-list', '#results').append([
     '<div class="media span4">',
@@ -42,6 +43,7 @@ Item.prototype.printItem         = function() {
         '<p class="level">Level: '+ this.getLevel() + '</p>',
         '<p class="offer ' + this.getOfferVariation() + '">Buy price: '+ this.getMaxOfferPrice() + '</p>',
         '<p class="sale ' + this.getSaleVariation() + '">Sale price: ' + this.getMinSalePrice() + '</p>',
+        '<p class="sale">Appr. profit: ' + this.getProfit() + '</p>',
         '<a href="#" class="btn btn-copy btn-small pull-right" data-clipboard-text="' + this.getName() + '" title="Copy to Clipboard">',
           '<i class="icon-pencil"></i>',
         '</a>',
@@ -82,6 +84,7 @@ $(document).ready(function() {
     $('#results').animate({left: right});
     $('#action').animate({left: show});
     $('.results-list', '#results').html('');
+    return false;
   });
 
   ///////////////////////
@@ -115,22 +118,22 @@ $(document).ready(function() {
       var itemsDisplayed = 20,    // number of results displayed
           saleQuantity   = 100,   // number of this item on sale
           offerQuantity  = 100,   // number of offers for this item
-          minimumOffer   = 100,   // minimum price for offers
-          minimumProfit  = 0.5,   // minimum percentage of profit
+          minimumOffer   = 50,   // minimum price for offers
+          minimumProfit  = 0.0,   // minimum percentage of profit
           exclusivity    = true;  // it is not in the route of tp farmers
     } else if ($(this).is('#medium')) {
       var itemsDisplayed = 20,
           saleQuantity   = 25,
           offerQuantity  = 25,
-          minimumOffer   = 35000,
-          minimumProfit  = 0.4,
+          minimumOffer   = 30000,
+          minimumProfit  = 0.0,
           exclusivity    = false;
     } else if ($(this).is('#high')) {
       var itemsDisplayed = 20,
           saleQuantity   = 3,
           offerQuantity  = 3,
           minimumOffer   = 150000,
-          minimumProfit  = 0.3,
+          minimumProfit  = 0.0,
           exclusivity    = false;
     };
 
@@ -166,7 +169,7 @@ $(document).ready(function() {
 
           if (result.max_offer_unit_price >= minimumOffer && result.sale_availability >= saleQuantity && result.offer_availability >= offerQuantity && result.min_sale_unit_price >= result.max_offer_unit_price + (result.max_offer_unit_price * minimumProfit)) {
             if (exclusivity == true) {
-              if (result.sale_price_change_last_hour > 0 || result.offer_price_change_last_hour < 0) {
+              if (result.sale_price_change_last_hour > 0 || result.offer_price_change_last_hour < 0 && result.offer_availability <= result.sale_availability * 2) {
                 items.push(result);
               }
             } else {
