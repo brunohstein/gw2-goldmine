@@ -25,10 +25,10 @@
     <div class="hero-unit">
       <h1>GW2 Gold Mine</h1>
       <p>
-        Select the item type you are looking for and the price range you are capable to invest and let us do the rest.
+        Select the item type you are looking for and the value you are capable to invest and let us do the rest.
       </p>
-      <p>
-        <select id="type">
+      <p class="form-inline">
+        <select id="type" class="span2">
           <option value="0">Armor</option>
           <option value="2">Bag</option>
           <option value="3">Consumable</option>
@@ -44,17 +44,12 @@
           <option value="18">Weapon</option>
           <option value="all">All (turtle mode)</option>
         </select>
+        <input type="text" placeholder="Gold" id="gold" class="span1 gold" maxlength="2">
+        <input type="text" placeholder="Silver" id="silver" class="span1 silver" maxlength="2">
+        <input type="text" placeholder="Copper" id="copper" class="span1 copper" maxlength="2">
       </p>
       <p>
-        <a class="btn btn-primary btn-large" id="low">
-          From 10 copper
-        </a>
-        <a class="btn btn-primary btn-large" id="medium">
-          From 3 gold
-        </a>
-        <a class="btn btn-primary btn-large" id="high">
-          From 15 gold
-        </a>
+        <a href="#" class="btn btn-primary btn-large" id="search">Shut up and take my money!</a>
       </p>
     </div>
   </section>
