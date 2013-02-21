@@ -118,22 +118,22 @@ $(document).ready(function() {
       var itemsDisplayed = 20,    // number of results displayed
           saleQuantity   = 100,   // number of this item on sale
           offerQuantity  = 100,   // number of offers for this item
-          minimumOffer   = 50,   // minimum price for offers
-          minimumProfit  = 0.0,   // minimum percentage of profit
+          minimumOffer   = 10,    // minimum price for offers
+          minimumProfit  = 0.3,   // minimum percentage of profit
           exclusivity    = true;  // it is not in the route of tp farmers
     } else if ($(this).is('#medium')) {
       var itemsDisplayed = 20,
           saleQuantity   = 25,
           offerQuantity  = 25,
           minimumOffer   = 30000,
-          minimumProfit  = 0.0,
+          minimumProfit  = 0.3,
           exclusivity    = false;
     } else if ($(this).is('#high')) {
       var itemsDisplayed = 20,
           saleQuantity   = 3,
           offerQuantity  = 3,
           minimumOffer   = 150000,
-          minimumProfit  = 0.0,
+          minimumProfit  = 0.3,
           exclusivity    = false;
     };
 
