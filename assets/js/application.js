@@ -169,7 +169,7 @@ $(document).ready(function() {
 
           if (result.max_offer_unit_price >= minimumOffer && result.sale_availability >= saleQuantity && result.offer_availability >= offerQuantity && result.min_sale_unit_price >= result.max_offer_unit_price + (result.max_offer_unit_price * minimumProfit)) {
             if (exclusivity == true) {
-              if (result.sale_price_change_last_hour > 0 || result.offer_price_change_last_hour < 0 && result.offer_availability <= result.sale_availability * 2) {
+              if (result.sale_price_change_last_hour > 0 || result.offer_price_change_last_hour < 0) {
                 items.push(result);
               }
             } else {
