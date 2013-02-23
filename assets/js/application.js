@@ -61,7 +61,7 @@ Item.prototype.printItem         = function() {
 ///////////////////////////////////////////////////////////////////////////
 
 toGSC = function(val) { var openG = '<span class="gold">'; var closeG = '</span>'; var openS = '<span class="silver">';  var closeS = '</span>'; var openC = '<span class="copper">'; var closeC = '</span>'; var sign = (val < 0 ? -1 : 1); var g = Math.floor(sign * val / 10000); var s = Math.floor((sign * val - g * 10000) / 100); var c = sign * val - g * 10000 - s * 100; if (g) return openG + (sign * g) + closeG + openS + s + closeS + openC + c + closeC; if (s) return openS + (sign * s) + closeS + openC + c + closeC; if (c) return openC + (sign * c) + closeC; return openC + '0' + closeC; };
-toLeadZero = function(val) { return ('0' + val).slice(-2); }
+toLeadZero = function(val) { return ('00' + val).slice(-2); }
 
 ////////////////////
 // Document ready //
@@ -119,18 +119,18 @@ $(document).ready(function() {
         copper       = toLeadZero($('#copper', '#action').val()),
         investment   = parseInt("" + gold + silver + copper),
         minimumOffer = investment;
-    
-    if (minimumOffer > 0) {
+
+    if (minimumOffer > 0 && minimumOffer < 10000) {
       var itemsDisplayed = 20,            // number of results displayed
           saleQuantity   = 100,           // number of this item on sale
           offerQuantity  = 100,           // number of offers for this item
           minimumProfit  = 0.3,           // minimum percentage of profit
           exclusivity    = true;          // it is not in the route of tp farmers
-    } else if (minimumOffer >= 10000) {
+    } else if (minimumOffer >= 10000 && minimumOffer < 100000) {
       var itemsDisplayed = 20,
           saleQuantity   = 25,
           offerQuantity  = 25,
-          minimumProfit  = 0.3,
+          minimumProfit  = 0,
           exclusivity    = false;
     } else if (minimumOffer >= 100000) {
       var itemsDisplayed = 20,
