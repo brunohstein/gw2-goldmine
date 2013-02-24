@@ -61,7 +61,7 @@ Item.prototype.printItem         = function() {
 ///////////////////////////////////////////////////////////////////////////
 
 toGSC = function(val) { var openG = '<span class="gold">'; var closeG = '</span>'; var openS = '<span class="silver">';  var closeS = '</span>'; var openC = '<span class="copper">'; var closeC = '</span>'; var sign = (val < 0 ? -1 : 1); var g = Math.floor(sign * val / 10000); var s = Math.floor((sign * val - g * 10000) / 100); var c = sign * val - g * 10000 - s * 100; if (g) return openG + (sign * g) + closeG + openS + s + closeS + openC + c + closeC; if (s) return openS + (sign * s) + closeS + openC + c + closeC; if (c) return openC + (sign * c) + closeC; return openC + '0' + closeC; };
-toLeadZero = function(val) { return ('00' + val).slice(-2); }
+toLeadZero = function(val, maxLength) { return ('0000' + val).slice(maxLength); }
 
 ////////////////////
 // Document ready //
@@ -114,9 +114,9 @@ $(document).ready(function() {
     //////////////////////////
 
     var type         = $('#type', '#action').val(),
-        gold         = toLeadZero($('#gold', '#action').val()),
-        silver       = toLeadZero($('#silver', '#action').val()),
-        copper       = toLeadZero($('#copper', '#action').val()),
+        gold         = toLeadZero($('#gold', '#action').val(), 4),
+        silver       = toLeadZero($('#silver', '#action').val(), 2),
+        copper       = toLeadZero($('#copper', '#action').val(), 2),
         investment   = parseInt("" + gold + silver + copper),
         minimumOffer = investment;
 
