@@ -120,24 +120,30 @@ $(document).ready(function() {
         investment   = parseInt("" + gold + silver + copper),
         minimumOffer = investment;
 
-    if (minimumOffer > 0 && minimumOffer < 10000) {
-      var itemsDisplayed = 20,            // number of results displayed
-          saleQuantity   = 100,           // number of this item on sale
-          offerQuantity  = 100,           // number of offers for this item
-          minimumProfit  = 0.3,           // minimum percentage of profit
-          exclusivity    = true;          // it is not in the route of tp farmers
+    if (minimumOffer > 0 && minimumOffer < 5000) {
+      var itemsDisplayed = 20,                                      // number of results displayed
+          saleQuantity   = 500,                                     // number of this item on sale
+          offerQuantity  = 500,                                     // number of offers for this item
+          minimumProfit  = 0.5,                                     // minimum percentage of profit
+          exclusivity    = false;                                   // it is not in the route of tp farmers
+    } else if (minimumOffer > 5000 && minimumOffer < 10000) {
+      var itemsDisplayed = 20,                                      // number of results displayed
+          saleQuantity   = 150,                                     // number of this item on sale
+          offerQuantity  = 150,                                     // number of offers for this item
+          minimumProfit  = 0.3,                                     // minimum percentage of profit
+          exclusivity    = false;                                   // it is not in the route of tp farmers
     } else if (minimumOffer >= 10000 && minimumOffer < 100000) {
-      var itemsDisplayed = 20,
-          saleQuantity   = 25,
-          offerQuantity  = 25,
-          minimumProfit  = 0,
-          exclusivity    = false;
+      var itemsDisplayed = 20,                                      // number of results displayed
+          saleQuantity   = 25,                                      // number of this item on sale
+          offerQuantity  = 25,                                      // number of offers for this item
+          minimumProfit  = 0.3,                                     // minimum percentage of profit
+          exclusivity    = false;                                   // it is not in the route of tp farmers
     } else if (minimumOffer >= 100000) {
-      var itemsDisplayed = 20,
-          saleQuantity   = 5,
-          offerQuantity  = 5,
-          minimumProfit  = 0.3,
-          exclusivity    = false;
+      var itemsDisplayed = 20,                                      // number of results displayed
+          saleQuantity   = 5,                                       // number of this item on sale
+          offerQuantity  = 5,                                       // number of offers for this item
+          minimumProfit  = 0.3,                                     // minimum percentage of profit
+          exclusivity    = false;                                   // it is not in the route of tp farmers
     };
 
     ////////////////
