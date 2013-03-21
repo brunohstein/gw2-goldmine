@@ -120,7 +120,7 @@ $(document).ready(function() {
         investment   = parseInt("" + gold + silver + copper),
         minimumOffer = investment;
 
-    if (minimumOffer > 0 && minimumOffer < 5000) {
+    if (minimumOffer >= 0 && minimumOffer < 5000) {
       var itemsDisplayed = 20,                                      // number of results displayed
           saleQuantity   = 500,                                     // number of this item on sale
           offerQuantity  = 500,                                     // number of offers for this item
